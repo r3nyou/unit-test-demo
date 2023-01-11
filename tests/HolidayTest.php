@@ -26,6 +26,12 @@ class HolidayTest extends TestCase
         $this->sayHelloShouldBe('Merry Xmas');
     }
 
+    public function test_dec_24_is_xmas()
+    {
+        $this->givenDate('12', '24');
+        $this->sayHelloShouldBe('Merry Xmas');
+    }
+
     /**
      * @param $month
      * @param $day
