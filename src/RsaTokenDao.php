@@ -2,7 +2,7 @@
 
 namespace App;
 
-class RsaTokenDao
+class RsaTokenDao implements IRsaToken
 {
     public function getRandom($account)
     {

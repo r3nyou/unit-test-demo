@@ -2,7 +2,7 @@
 
 namespace App;
 
-class ProfileDao
+class ProfileDao implements IProfile
 {
     public function getPassword($account)
     {

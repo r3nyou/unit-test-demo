@@ -5,6 +5,22 @@ namespace App;
 class AuthenticationService
 {
     /**
+     * @var IProfile
+     */
+    private $profile;
+
+    /**
+     * @var IRsaToken
+     */
+    private $token;
+
+    public function __construct(IProfile $profile = null, IRsaToken $token = null)
+    {
+        $this->profile = $profile ?: new ProfileDao();
+        $this->token = $token ?: new RsaTokenDao();
+    }
+
+    /**
      * @param $account
      * @param $password
      *
@@ -12,11 +28,9 @@ class AuthenticationService
      */
     public function isValid($account, $password)
     {
-        $profile = new ProfileDao();
-        $passwordFromDao = $profile->getPassword($account);
+        $passwordFromDao = $this->profile->getPassword($account);
 
-        $token = new RsaTokenDao();
-        $randomCode = $token->getRandom($account);
+        $randomCode = $this->token->getRandom($account);
 
         $validPassword = $passwordFromDao . $randomCode;
         $isValid = $password === $validPassword;
